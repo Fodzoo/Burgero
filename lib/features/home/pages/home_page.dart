@@ -19,11 +19,11 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.onAddToCart});
 
   final void Function(
-    ProductModel product,
-    List<String> toppings,
-    List<String> sides,
-    num unitPrice,
-  )
+      ProductModel product,
+      List<String> toppings,
+      List<String> sides,
+      num unitPrice,
+      )
   onAddToCart;
 
   @override
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
               floating: false,
               scrolledUnderElevation: 0,
               backgroundColor: Colors.white,
-              toolbarHeight: 185,
+              toolbarHeight: 225,
               automaticallyImplyLeading: false,
               flexibleSpace: Padding(
                 padding: const EdgeInsets.only(top: 35, right: 20, left: 20),
@@ -67,6 +67,7 @@ class _HomePageState extends State<HomePage> {
                 child: FoodCategory(
                   selectedIndex: selectedIndex,
                   category: category,
+                  onSelected: (index) => setState(() => selectedIndex = index),
                 ),
               ),
             ),
@@ -111,6 +112,7 @@ class _HomePageState extends State<HomePage> {
 
                   // Success
                   if (state is ProductsSuccess) {
+                    // TODO: فلترة بالفئة بعد ما نضيف حقل category في ProductModel
                     final products = state.products;
 
                     if (products.isEmpty) {
@@ -129,12 +131,12 @@ class _HomePageState extends State<HomePage> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: products.length,
                       gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 0.75,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                          ),
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.75,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                      ),
                       itemBuilder: (context, index) {
                         final ProductModel product = products[index];
 
@@ -162,7 +164,6 @@ class _HomePageState extends State<HomePage> {
                       },
                     );
                   }
-
                   return const SizedBox();
                 },
               ),

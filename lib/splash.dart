@@ -82,12 +82,13 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
             return FadeTransition(
               opacity: animation,
               child: SlideTransition(
-                position: Tween<Offset>(
-                  begin: const Offset(0, 0.08),
-                  end: Offset.zero,
-                ).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.easeOut),
-                ),
+                position:
+                    Tween<Offset>(
+                      begin: const Offset(0, 0.08),
+                      end: Offset.zero,
+                    ).animate(
+                      CurvedAnimation(parent: animation, curve: Curves.easeOut),
+                    ),
                 child: child,
               ),
             );
@@ -106,31 +107,36 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.primary,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const Gap(200),
-            AnimatedBuilder(
-              animation: Listenable.merge([_entryController, _pulseController]),
-              builder: (context, child) {
-                return Opacity(
-                  opacity: _logoFade.value,
-                  child: Transform.translate(
-                    offset: Offset(0, _logoSlide.value),
-                    child: Transform.scale(
-                      scale: _logoScale.value * _pulse.value,
-                      child: child,
-                    ),
+      body: Column(
+        children: [
+          Gap(h * 0.15),
+          AnimatedBuilder(
+            animation: Listenable.merge([_entryController, _pulseController]),
+            builder: (context, child) {
+              return Opacity(
+                opacity: _logoFade.value,
+                child: Transform.translate(
+                  offset: Offset(0, _logoSlide.value),
+                  child: Transform.scale(
+                    scale: _logoScale.value * _pulse.value,
+                    child: child,
                   ),
-                );
-              },
-              child: Image.asset("assets/logo/logo.png"),
+                ),
+              );
+            },
+            child: SizedBox(
+              height: h * 0.25,
+              child: Image.asset("assets/logo/logo.png", fit: BoxFit.contain),
             ),
-            const Spacer(),
-            AnimatedBuilder(
+          ),
+          const Spacer(),
+          Flexible(
+            flex: 3,
+            child: AnimatedBuilder(
               animation: _entryController,
               builder: (context, child) {
                 return Opacity(
@@ -141,13 +147,14 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
                   ),
                 );
               },
-              child: Image.asset("assets/splash/splash.png"),
+              child: Image.asset(
+                "assets/splash/splash.png",
+                fit: BoxFit.contain,
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
-
-// 4:16:20
