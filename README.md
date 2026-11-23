@@ -2,13 +2,25 @@
 
 **Burgero** is a Flutter-based food ordering application that provides users with a simple and convenient way to browse food products, manage their cart, and place orders.
 
+## 📸 Screenshots
+
+| Splash | Login | Home |
+|:------:|:-----:|:----:|
+| <img src="screenshots/splash.png" width="200"/> | <img src="screenshots/login.png" width="200"/> | <img src="screenshots/home.png" width="200"/> |
+
+| Product Details | Cart | Order History |
+|:---------------:|:----:|:-------------:|
+| <img src="screenshots/product.png" width="200"/> | <img src="screenshots/cart.png" width="200"/> | <img src="screenshots/orders.png" width="200"/> |
+
 ## ✨ Features
 
 - **User Authentication:** Sign up and log in.
 - **Product Browsing:** Fetch and display available food products.
+- **Category Filter:** Filter products by category.
 - **Shopping Cart:** Add products and manage cart items.
 - **Checkout:** Place orders through the application.
 - **Order History:** View previous orders and manage order items.
+- **Profile & Settings:** Manage user profile and app settings.
 - **Cloud Database:** Store and manage application data using Supabase.
 
 ## 🛠️ Tech Stack
@@ -72,13 +84,20 @@ The application follows a feature-based folder structure:
 
 ```text
 lib/
+├── core/
+│   ├── constants/
+│   ├── network/
+│   ├── theme/
+│   └── utils/
 ├── features/
 │   ├── auth/
-│   ├── product/
-│   ├── home/
 │   ├── cart/
 │   ├── chekout/
-│   └── order_history/
+│   ├── home/
+│   ├── order_history/
+│   ├── product/
+│   └── settings/
+├── shared/
 ├── main.dart
 ├── root.dart
 └── splash.dart
